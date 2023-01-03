@@ -1,6 +1,27 @@
 #include "rectangle.hpp"
 
-Rectangle::Rectangle()
+
+void Rectangle::beolvas(std::ifstream &bf)
 {
-    hellló worldh
+
+
+    for (int i = 0; i < 4; i++)
+    {
+        int a, b, c;
+        bf >> a >> b >> c;
+
+        sarok corner(a, b, c);
+
+        sarkok.push_back(corner);
+
+    }
+
+}
+
+void Rectangle::forgat()
+{
+    sarok forgatott = sarkok[sarkok.size()-1];
+
+    sarkok.pop_back();
+    sarkok.insert(sarkok.begin(), forgatott);
 }
