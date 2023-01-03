@@ -13,7 +13,3 @@ HEADERS += \
     cube.hpp \
     geometry.h \
     rectangle.hpp
-
-DISTFILES += \
-    ../../../../Users/Felhasználó/Desktop/PPKE ITK/New folder/text.txt \
-    text
