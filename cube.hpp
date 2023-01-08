@@ -11,7 +11,12 @@ class Cube
 
 public:
 
-    std::vector<Rectangle> sides;
+    Rectangle base;
+    Rectangle top;
+    Rectangle near;
+    Rectangle far;
+    Rectangle right;
+    Rectangle left;
 
     Cube() {}
 
