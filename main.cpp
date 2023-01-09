@@ -2,6 +2,7 @@
 #include "geometry.h"
 #include "cube.hpp"
 
+
 bool sarokeq(Rectangle a, Rectangle b, int as, int bs)
 {
     bool R, G, B;
@@ -20,7 +21,7 @@ int main()
 {
 
     std::vector<Rectangle> rec_vec;
-    std::ifstream bf("text.txt");  // ide majd a file nevét írjuk be!
+    /*std::ifstream bf("text.txt");  // ide majd a file nevét írjuk be!
 
     if(!bf.good())
     {
@@ -35,7 +36,31 @@ int main()
 
         rec_vec.push_back(rec);
     }
-    bf.close();
+    bf.close();*/
+
+    sarok sar1(0, 160, 0);
+    sarok sar2(0, 0, 160);
+
+    for(int j = 0; j < 6;j++)
+    {
+        Rectangle rec;
+        for(int i = 0; i < 2;i++)
+        {
+            rec.sarkok.push_back(sar1);
+            rec.sarkok.push_back(sar2);
+        }
+        rec_vec.push_back(rec);
+    }
+    for(int j = 0; j < 6;j++)
+    {
+        Rectangle rec;
+        for(int i = 0; i < 2;i++)
+        {
+            rec.sarkok.push_back(sar2);
+            rec.sarkok.push_back(sar1);
+        }
+        rec_vec.push_back(rec);
+    }
 
     for (Rectangle r : rec_vec)
     {
@@ -66,7 +91,7 @@ int main()
         Rectangle temprecleft;
         Rectangle temprectop;
 
-        for(auto i = potential.begin(); i != potential.end();i++)
+        for(auto i = potential.begin(); potential.size() > 5;i++)
         {
             temprecbase = *i;
             potential.erase(i);
@@ -264,6 +289,8 @@ int main()
                 tempcube.top = temprectop;
 
                 Cubes.push_back(tempcube);
+                tempcube.cube_check();
+                std::cout<< Cubes.size()<<std::endl;
             }
         }
 
@@ -272,9 +299,8 @@ int main()
     }
     }
 
-
-
     if(Cubes.size() == 0) {std::cout << "Nem lehet egy kockat se csinalni." << std::endl;}
+    std::cout<< Cubes.size()<<std::endl;
 
     return 0;
 }

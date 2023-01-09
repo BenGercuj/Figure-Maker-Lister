@@ -20,8 +20,6 @@ public:
 
     Cube() {}
 
-    void cube_build(std::vector<Rectangle> recs);
-
     void cube_check();
 };
 
