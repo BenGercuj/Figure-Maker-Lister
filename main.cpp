@@ -117,6 +117,7 @@ int main()
                 else if(j < potential.size())
                 {
                     j++;
+                    k = 0;
                 }
                 else
                 {
@@ -146,6 +147,7 @@ int main()
                 else if(j < potential.size())
                 {
                     j++;
+                    k = 0;
                 }
                 else
                 {
@@ -185,6 +187,7 @@ int main()
                 else if(j < potential.size())
                 {
                     j++;
+                    k = 0;
                 }
                 else
                 {
@@ -225,6 +228,7 @@ int main()
                 else if(j < potential.size())
                 {
                     j++;
+                    k = 0;
                 }
                 else
                 {
@@ -266,6 +270,7 @@ int main()
                 else if(j < potential.size())
                 {
                     j++;
+                    k = 0;
                 }
                 else
                 {
