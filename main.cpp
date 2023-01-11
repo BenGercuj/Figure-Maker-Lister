@@ -274,6 +274,7 @@ int main()
     //első rész vége mentem sörözni szoszi
 
     std::vector<Cube> Cubes = rectangle_to_cube(rec_vec);
+    Geometry geo(Cubes);
 
     return 0;
 }
