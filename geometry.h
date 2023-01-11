@@ -7,8 +7,11 @@
 
 class Geometry
 {
+    std::vector<Cube> cubes;
+    std::vector<std::vector<std::vector<Cube>>> geometry;
+
 public:
-    Geometry();
+    Geometry(std::vector<Cube> cube_vec);
 };
 
 #endif // GEOMETRY_H
