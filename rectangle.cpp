@@ -25,3 +25,12 @@ void Rectangle::forgat()
     sarkok.pop_back();
     sarkok.insert(sarkok.begin(), forgatott);
 }
+
+void Rectangle::antiforgat()
+{
+    sarok sar = sarkok[0];
+
+    sarkok.erase(sarkok.begin());
+
+    sarkok.push_back(sar);
+}

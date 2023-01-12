@@ -105,27 +105,18 @@ std::vector<Cube> rectangle_to_cube(std::vector<Rectangle> &rec_vec)
 
             while(!match && goodbase) //jobb(right) oldal kereses
             {
-                if(sarokeq(temprecbase, potential[j], 1, 1))
+                if(((sarokeq(temprecbase, potential[j], 1, 1) && sarokeq(temprecbase, potential[j], 2, 2)) && sarokeq(temprecnear, potential[j], 2, 0)) && sarokeq(temprecfar, potential[j], 1, 3))
                 {
-                    if(sarokeq(temprecbase, potential[j], 2, 2))
-                    {
-                        if(sarokeq(temprecnear, potential[j], 2, 0))
-                        {
-                            if(sarokeq(temprecfar, potential[j], 1, 3))
-                            {
-                                match = true;
-                                temprecright = potential[j];
-                                potential.erase(potential.begin() + j);
-                            }
-                        }
-                    }
+                    match = true;
+                    temprecright = potential[j];
+                    potential.erase(potential.begin() + j);
                 }
                 else if(k < 3)
                 {
                     potential[j].forgat();
                     k++;
                 }
-                else if(j < potential.size())
+                else if(j < potential.size()-1)
                 {
                     j++;
                     k = 0;
@@ -146,20 +137,11 @@ std::vector<Cube> rectangle_to_cube(std::vector<Rectangle> &rec_vec)
 
             while(!match && goodbase) //bal(left) oldal kereses
             {
-                if(sarokeq(temprecbase, potential[j], 0, 0))
+                if(((sarokeq(temprecbase, potential[j], 0, 0) && sarokeq(temprecbase, potential[j], 3, 3)) && sarokeq(temprecnear, potential[j], 3, 1)) && sarokeq(temprecfar, potential[j], 0, 2))
                 {
-                    if(sarokeq(temprecbase, potential[j], 3, 3))
-                    {
-                        if(sarokeq(temprecnear, potential[j], 3, 1))
-                        {
-                            if(sarokeq(temprecfar, potential[j], 0, 2))
-                            {
-                                match = true;
-                                temprecleft = potential[j];
-                                potential.erase(potential.begin() + j);
-                            }
-                        }
-                    }
+                    match = true;
+                    temprecleft = potential[j];
+                    potential.erase(potential.begin() + j);
                 }
                 else if(k < 3)
                 {
@@ -188,20 +170,11 @@ std::vector<Cube> rectangle_to_cube(std::vector<Rectangle> &rec_vec)
 
             while(!match && goodbase) //felso(top) oldal kereses
             {
-                if(sarokeq(temprecnear, potential[j], 3, 0))
+                if(((sarokeq(temprecnear, potential[j], 3, 0) && sarokeq(temprecnear, potential[j], 2, 1)) && sarokeq(temprecfar, potential[j], 1, 2)) && sarokeq(temprecfar, potential[j], 0, 3))
                 {
-                    if(sarokeq(temprecnear, potential[j], 2, 1))
-                    {
-                        if(sarokeq(temprecfar, potential[j], 1, 2))
-                        {
-                            if(sarokeq(temprecfar, potential[j], 0, 3))
-                            {
-                                match = true;
-                                temprectop = potential[j];
-                                potential.erase(potential.begin() + j);
-                            }
-                        }
-                    }
+                    match = true;
+                    temprectop = potential[j];
+                    potential.erase(potential.begin() + j);
                 }
                 else if(k < 3)
                 {
@@ -271,10 +244,38 @@ int main()
     }
     bf.close();
 
+    sarok sar1(0,100,0);
+    sarok sar2(0,0,100);
+    sarok sar3(100,0,0);
+
+    for(int i=0;i<3;i++)
+    {
+        Rectangle rec;
+
+        rec.sarkok.push_back(sar1);
+        rec.sarkok.push_back(sar2);
+        rec.sarkok.push_back(sar1);
+        rec.sarkok.push_back(sar3);
+
+        rec_vec.push_back(rec);
+    }
+
+    for(int i=0;i<3;i++)
+    {
+        Rectangle rec;
+
+        rec.sarkok.push_back(sar3);
+        rec.sarkok.push_back(sar2);
+        rec.sarkok.push_back(sar1);
+        rec.sarkok.push_back(sar2);
+
+        rec_vec.push_back(rec);
+    }
     //első rész vége mentem sörözni szoszi
 
     std::vector<Cube> Cubes = rectangle_to_cube(rec_vec);
     Geometry geo(Cubes);
+
 
     return 0;
 }

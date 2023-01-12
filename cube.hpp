@@ -21,6 +21,12 @@ public:
     Cube() {}
 
     void cube_check();
+
+    void xrotate();
+
+    void yrotate();
+
+    void zrotate();
 };
 
 #endif // CUBE_HPP

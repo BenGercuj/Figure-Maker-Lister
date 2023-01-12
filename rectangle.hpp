@@ -28,6 +28,8 @@ public:
 
     void forgat();
 
+    void antiforgat();
+
     void kiirat()
     {
         for (sarok a : sarkok)
