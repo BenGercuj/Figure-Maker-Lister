@@ -27,9 +27,9 @@ void Cube::xrotate()
     far = temprec1;
 
     left.forgat();
-    right.forgat();
-    right.forgat();
-    right.forgat();
+    right.antiforgat();
+    base.antiforgat();
+    near.antiforgat();
 }
 
 void Cube::yrotate()
@@ -46,9 +46,9 @@ void Cube::yrotate()
     left = temprec1;
 
     near.forgat();
-    far.forgat();
-    far.forgat();
-    far.forgat();
+    far.antiforgat();
+    right.forgat();
+    base.antiforgat();
 }
 
 void Cube::zrotate()
@@ -66,4 +66,8 @@ void Cube::zrotate()
 
     base.forgat();
     top.forgat();
+    right.forgat();
+    far.forgat();
+    left.forgat();
+    near.forgat();
 }

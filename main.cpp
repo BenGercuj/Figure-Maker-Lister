@@ -227,7 +227,7 @@ std::vector<Cube> rectangle_to_cube(std::vector<Rectangle> &rec_vec)
 int main()
 {
     std::vector<Rectangle> rec_vec;
-    /*std::ifstream bf("text.txt");  // ide majd a file nevét írjuk be!
+    std::ifstream bf("text.txt");  // ide majd a file nevét írjuk be!
 
     if(!bf.good())
     {
@@ -242,7 +242,7 @@ int main()
 
         rec_vec.push_back(rec);
     }
-    bf.close();*/
+    bf.close();
 
     sarok sar1(0,100,0);
     sarok sar2(0,0,100);
@@ -276,11 +276,6 @@ int main()
     std::vector<Cube> Cubes = rectangle_to_cube(rec_vec);
     Geometry geo(Cubes);
 
-    /*std::cout<<Cubes[0].near.sarkok[3].R<<Cubes[0].near.sarkok[3].G<<Cubes[0].near.sarkok[3].B<<std::endl;
-    std::cout<<Cubes[0].right.sarkok[0].R<<Cubes[0].right.sarkok[0].G<<Cubes[0].right.sarkok[0].B<<std::endl;
-    Cubes[0].zrotate();
-    Cubes[0].cube_check();
-    std::cout<<Cubes[0].right.sarkok[0].R<<Cubes[0].right.sarkok[0].G<<Cubes[0].right.sarkok[0].B<<std::endl;*/
 
     return 0;
 }
