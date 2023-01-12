@@ -71,7 +71,26 @@ std::vector<std::vector<int>> check_neighbour_occupancy(std::vector<std::vector<
 //    }
 //}
 
+bool operator==(const sarok &s1, const sarok &s2)
+{
+    return s1.B == s2.B && s1.G == s2.G && s1.R == s2.R;
+}
+
 void Geometry::cubes_to_geometry()
 {
-    //
+    geometry.push_back(cubes.back());
+    cubes.pop_back();
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (geometry[0].right.sarkok[1] == cubes[0].left.sarkok[0] && geometry[0].right.sarkok[2] == cubes[0].left.sarkok[3] && geometry[0].right.sarkok[3] == cubes[0].left.sarkok[2] && geometry[0].right.sarkok[0] == cubes[0].left.sarkok[1])
+        {
+            geometry.push_back(cubes.back());
+        }
+
+        else
+        {
+            //
+        }
+    }
 }
