@@ -14,7 +14,7 @@ bool sarokeq(Rectangle a, Rectangle b, int as, int bs)
     else {return false;}
 }
 
-std::vector<Cube> rectangle_to_cube(std::vector<Rectangle> rec_vec)
+std::vector<Cube> rectangle_to_cube(std::vector<Rectangle> &rec_vec)
 {
     std::vector<Cube> Cubes;
 
