@@ -57,9 +57,8 @@ void Geometry::cubes_to_geometry()
         {
             for (int y = 0; y < geo_size; y++)
             {
-                for (int z = 0; z < geo_size; z++)
-                {
-                    if (occupancy[x][y][z] == 1)
+                // Z tengely egyelõre ignorálva
+                if (occupancy[x][y][geo_mid] == 1)
                     {
                         // X oldal vizsgálata 'balról'
                         if (x > 0)
@@ -70,7 +69,6 @@ void Geometry::cubes_to_geometry()
                             }
                         }
                     }
-                }
             }
         }
     }
