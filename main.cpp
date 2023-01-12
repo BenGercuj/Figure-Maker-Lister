@@ -32,7 +32,7 @@ std::vector<Cube> rectangle_to_cube(std::vector<Rectangle> &rec_vec)
         Rectangle temprecleft;
         Rectangle temprectop;
 
-        for(auto i = potential.begin(); potential.size() > 5;i++)
+        for(auto i = potential.begin(); potential.size() > 5 && i != potential.end();i++)
         {
             temprecbase = *i;
             potential.erase(i);
@@ -148,7 +148,7 @@ std::vector<Cube> rectangle_to_cube(std::vector<Rectangle> &rec_vec)
                     potential[j].forgat();
                     k++;
                 }
-                else if(j < potential.size())
+                else if(j < potential.size()-1)
                 {
                     j++;
                     k = 0;
@@ -181,7 +181,7 @@ std::vector<Cube> rectangle_to_cube(std::vector<Rectangle> &rec_vec)
                     potential[j].forgat();
                     k++;
                 }
-                else if(j < potential.size())
+                else if(j < potential.size()-1)
                 {
                     j++;
                     k = 0;
@@ -227,7 +227,7 @@ std::vector<Cube> rectangle_to_cube(std::vector<Rectangle> &rec_vec)
 int main()
 {
     std::vector<Rectangle> rec_vec;
-    std::ifstream bf("text.txt");  // ide majd a file nevét írjuk be!
+    std::ifstream bf("nem_jo_szinu_2.txt");  // ide majd a file nevét írjuk be!
 
     if(!bf.good())
     {
@@ -244,33 +244,6 @@ int main()
     }
     bf.close();
 
-    sarok sar1(0,100,0);
-    sarok sar2(0,0,100);
-    sarok sar3(100,0,0);
-
-    for(int i=0;i<3;i++)
-    {
-        Rectangle rec;
-
-        rec.sarkok.push_back(sar1);
-        rec.sarkok.push_back(sar2);
-        rec.sarkok.push_back(sar1);
-        rec.sarkok.push_back(sar3);
-
-        rec_vec.push_back(rec);
-    }
-
-    for(int i=0;i<3;i++)
-    {
-        Rectangle rec;
-
-        rec.sarkok.push_back(sar3);
-        rec.sarkok.push_back(sar2);
-        rec.sarkok.push_back(sar1);
-        rec.sarkok.push_back(sar2);
-
-        rec_vec.push_back(rec);
-    }
     //első rész vége mentem sörözni szoszi
 
     std::vector<Cube> Cubes = rectangle_to_cube(rec_vec);
