@@ -15,11 +15,8 @@ Geometry::Geometry(std::vector<Cube> cube_vec) : cubes(cube_vec)
         plh.far.sarkok.push_back(s);
     }
 
-    std::vector<std::vector<std::vector<Cube>>> geometry_plh(cubes.size()*2, std::vector<std::vector<Cube>>(cubes.size()*2, std::vector<Cube>(cubes.size()*2, plh)));
+    std::vector<Cube> geometry_plh(cubes.size());
     geometry = geometry_plh;
-
-    std::vector<std::vector<std::vector<int>>> occupancy_plh(cubes.size()*2, std::vector<std::vector<int>>(cubes.size()*2, std::vector<int>(cubes.size()*2, 0)));
-    occupancy = occupancy_plh;
 }
 
 std::vector<std::vector<int>> check_neighbour_occupancy(std::vector<std::vector<std::vector<int>>> occupancy, unsigned x, unsigned y, unsigned z)
@@ -43,33 +40,38 @@ std::vector<std::vector<int>> check_neighbour_occupancy(std::vector<std::vector<
     return {{-1}};
 }
 
+//void Geometry::cubes_to_geometry()
+//{
+//    int geo_size = geometry[0][0].size();
+//    int geo_mid = geo_size/2;
+//    geometry[geo_mid][geo_mid][geo_mid] = cubes.back();
+//    occupancy[geo_mid][geo_mid][geo_mid] = 1;
+//    cubes.pop_back();
+
+//    for (size_t i = 0; i < cubes.size(); i++)
+//    {
+//        for (int x = 0; x < geo_size; x++)
+//        {
+//            for (int y = 0; y < geo_size; y++)
+//            {
+//                // Z tengely egyelõre ignorálva
+//                if (occupancy[x][y][geo_mid] == 1)
+//                    {
+//                        // X oldal vizsgálata 'balról'
+//                        if (x > 0)
+//                        {
+//                            if (occupancy[x-1][y][geo_mid] == 0)
+//                            {
+//                                //
+//                            }
+//                        }
+//                    }
+//            }
+//        }
+//    }
+//}
+
 void Geometry::cubes_to_geometry()
 {
-    int geo_size = geometry[0][0].size();
-    int geo_mid = geo_size/2;
-    geometry[geo_mid][geo_mid][geo_mid] = cubes.back();
-    occupancy[geo_mid][geo_mid][geo_mid] = 1;
-    cubes.pop_back();
-
-    for (size_t i = 0; i < cubes.size(); i++)
-    {
-        for (int x = 0; x < geo_size; x++)
-        {
-            for (int y = 0; y < geo_size; y++)
-            {
-                // Z tengely egyelõre ignorálva
-                if (occupancy[x][y][geo_mid] == 1)
-                    {
-                        // X oldal vizsgálata 'balról'
-                        if (x > 0)
-                        {
-                            if (occupancy[x-1][y][z] == 0)
-                            {
-                                //if (occupancy[x-1][y-1][z])
-                            }
-                        }
-                    }
-            }
-        }
-    }
+    //
 }

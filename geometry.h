@@ -8,8 +8,7 @@
 class Geometry
 {
     std::vector<Cube> cubes;
-    std::vector<std::vector<std::vector<Cube>>> geometry;
-    std::vector<std::vector<std::vector<int>>> occupancy;
+    std::vector<Cube> geometry;
 
 public:
     Geometry(std::vector<Cube> cube_vec);
