@@ -227,7 +227,7 @@ std::vector<Cube> rectangle_to_cube(std::vector<Rectangle> &rec_vec)
 int main()
 {
     std::vector<Rectangle> rec_vec;
-    std::ifstream bf("nem_jo_szinu_2.txt");  // ide majd a file nevét írjuk be!
+    std::ifstream bf("text.txt");  // ide majd a file nevét írjuk be!
 
     if(!bf.good())
     {
@@ -248,7 +248,7 @@ int main()
 
     std::vector<Cube> Cubes = rectangle_to_cube(rec_vec);
     Geometry geo(Cubes);
-
+    geo.cubes_to_geometry();
 
     return 0;
 }

@@ -15,7 +15,7 @@ Geometry::Geometry(std::vector<Cube> cube_vec) : cubes(cube_vec)
         plh.far.sarkok.push_back(s);
     }
 
-    std::vector<Cube> geometry_plh(cubes.size());
+    std::vector<Cube> geometry_plh(0);
     geometry = geometry_plh;
 }
 
@@ -78,19 +78,24 @@ bool operator==(const sarok &s1, const sarok &s2)
 
 void Geometry::cubes_to_geometry()
 {
-    geometry.push_back(cubes.back());
-    cubes.pop_back();
-
-    for (int i = 0; i < 4; i++)
+    if (cubes.size() > 0)
     {
-        if (geometry[0].right.sarkok[1] == cubes[0].left.sarkok[0] && geometry[0].right.sarkok[2] == cubes[0].left.sarkok[3] && geometry[0].right.sarkok[3] == cubes[0].left.sarkok[2] && geometry[0].right.sarkok[0] == cubes[0].left.sarkok[1])
-        {
-            geometry.push_back(cubes.back());
-        }
+        geometry.push_back(cubes.back());
+        cubes.pop_back();
+    }
 
-        else
+    if (cubes.size() > 0)
+    {
+        for (int i = 0; i < 4; i++)
         {
-            //
+            if (geometry[0].right.sarkok[1] == cubes[0].left.sarkok[0] && geometry[0].right.sarkok[2] == cubes[0].left.sarkok[3] && geometry[0].right.sarkok[3] == cubes[0].left.sarkok[2] && geometry[0].right.sarkok[0] == cubes[0].left.sarkok[1])
+            {
+                geometry.push_back(cubes[0]);
+                cubes.erase(cubes.begin());
+                i = 4;
+            }
+
+            else { cubes[0].yrotate(); }
         }
     }
 }
