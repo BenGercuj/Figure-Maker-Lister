@@ -1,4 +1,5 @@
 #include "geometry.h"
+#include <fstream>
 
 Geometry::Geometry(std::vector<Cube> cube_vec) : cubes(cube_vec)
 {
@@ -98,4 +99,47 @@ void Geometry::cubes_to_geometry()
             else { cubes[0].yrotate(); }
         }
     }
+}
+
+void Geometry::geometry_to_ply()
+{
+    std::ofstream kf("az_koczka.ply");
+    kf << "ply\n" << "format ascii 1.0\n" << "element vertex " << 6*4*geometry.size() << '\n';
+    kf << "property float32 x\n" << "property float32 y\n" << "property float32 z\n";
+    kf << "property uchar red\n" << "property uchar green\n" << "property uchar blue\n";
+    kf << "element face " << 6*geometry.size() << '\n' << "property list uint8 int32 vertex_indices\n";
+    kf << "end_header\n";
+
+    for (int i = 0; i < geometry.size(); i++)
+    {
+        kf << i << ' ' << 0 << ' ' << 0 << ' ' << geometry[i].base.sarkok[0].R << ' ' << geometry[i].base.sarkok[0].G << ' ' << geometry[i].base.sarkok[0].B << '\n';
+        kf << i+1 << ' ' << 0 << ' ' << 0 << ' ' << geometry[i].base.sarkok[1].R << ' ' << geometry[i].base.sarkok[1].G << ' ' << geometry[i].base.sarkok[1].B << '\n';
+        kf << i+1 << ' ' << 1 << ' ' << 0 << ' ' << geometry[i].base.sarkok[2].R << ' ' << geometry[i].base.sarkok[2].G << ' ' << geometry[i].base.sarkok[2].B << '\n';
+        kf << i << ' ' << 1 << ' ' << 0 << ' ' << geometry[i].base.sarkok[3].R << ' ' << geometry[i].base.sarkok[3].G << ' ' << geometry[i].base.sarkok[3].B << '\n';
+
+        kf << i << ' ' << 0 << ' ' << 1 << ' ' << geometry[i].top.sarkok[0].R << ' ' << geometry[i].top.sarkok[0].G << ' ' << geometry[i].top.sarkok[0].B << '\n';
+        kf << i+1 << ' ' << 0 << ' ' << 1 << ' ' << geometry[i].top.sarkok[1].R << ' ' << geometry[i].top.sarkok[1].G << ' ' << geometry[i].top.sarkok[1].B << '\n';
+        kf << i+1 << ' ' << 1 << ' ' << 1 << ' ' << geometry[i].top.sarkok[2].R << ' ' << geometry[i].top.sarkok[2].G << ' ' << geometry[i].top.sarkok[2].B << '\n';
+        kf << i << ' ' << 1 << ' ' << 1 << ' ' << geometry[i].top.sarkok[3].R << ' ' << geometry[i].top.sarkok[3].G << ' ' << geometry[i].top.sarkok[3].B << '\n';
+    }
+
+    // base, top
+    for (int i = 1; i <= 2*geometry.size(); i++)
+    {
+        kf << "4 " << i*4-1 << ' ' << i*4-2 << ' ' << i*4-3 << ' ' << i*4-4 << '\n';
+    }
+
+    // right
+    for (int i = 1; i <= geometry.size(); i++)
+    {
+        kf << "4 " << i*4-2 << ' ' << i*4-3 << ' ' << i*4+1 << ' ' << i*4+2 << '\n';
+    }
+
+    // left
+    for (int i = 1; i <= geometry.size(); i++)
+    {
+        kf << "4 " << i*4-2 << ' ' << i*4-3 << ' ' << i*4+1 << ' ' << i*4+2 << '\n';
+    }
+
+    kf.close();
 }

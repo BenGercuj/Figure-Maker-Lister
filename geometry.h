@@ -14,6 +14,7 @@ public:
     Geometry(std::vector<Cube> cube_vec);
 
     void cubes_to_geometry();
+    void geometry_to_ply();
 };
 
 #endif // GEOMETRY_H

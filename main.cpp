@@ -249,6 +249,7 @@ int main()
     std::vector<Cube> Cubes = rectangle_to_cube(rec_vec);
     Geometry geo(Cubes);
     geo.cubes_to_geometry();
+    if (Cubes.size() > 0) { geo.geometry_to_ply(); }
 
     return 0;
 }
