@@ -89,14 +89,32 @@ void Geometry::cubes_to_geometry()
     {
         for (int i = 0; i < 4; i++)
         {
-            if (geometry[0].right.sarkok[1] == cubes[0].left.sarkok[0] && geometry[0].right.sarkok[2] == cubes[0].left.sarkok[3] && geometry[0].right.sarkok[3] == cubes[0].left.sarkok[2] && geometry[0].right.sarkok[0] == cubes[0].left.sarkok[1])
+            if (cubes[0].left.sarkok[0].R == -1 && cubes[0].right.sarkok[0].R == -1)
             {
-                geometry.push_back(cubes[0]);
-                cubes.erase(cubes.begin());
-                i = 4;
+                if (cubes[0].base.sarkok[0] == geometry[0].base.sarkok[1] && cubes[0].base.sarkok[3] == geometry[0].base.sarkok[2] && cubes[0].top.sarkok[0] == geometry[0].top.sarkok[1] && cubes[0].top.sarkok[3] == geometry[0].top.sarkok[2])
+                {
+                    Rectangle plh = cubes[0].right;
+                    cubes[0].right = geometry[0].right;
+                    geometry[0].right = plh;
+                    geometry.push_back(cubes[0]);
+                    cubes.erase(cubes.begin());
+                    i = 4;
+                }
+
+                else { cubes[0].xrotate(); }
             }
 
-            else { cubes[0].yrotate(); }
+            else
+            {
+                if (geometry[0].right.sarkok[1] == cubes[0].left.sarkok[0] && geometry[0].right.sarkok[2] == cubes[0].left.sarkok[3] && geometry[0].right.sarkok[3] == cubes[0].left.sarkok[2] && geometry[0].right.sarkok[0] == cubes[0].left.sarkok[1])
+                {
+                    geometry.push_back(cubes[0]);
+                    cubes.erase(cubes.begin());
+                    i = 4;
+                }
+
+                else { cubes[0].yrotate(); }
+            }
         }
     }
 }
