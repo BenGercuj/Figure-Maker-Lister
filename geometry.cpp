@@ -81,13 +81,13 @@ void Geometry::cubes_to_geometry()
 {
     if (cubes.size() > 0)
     {
-        geometry.push_back(cubes[1]);
-        cubes.erase(cubes.begin());
+        geometry.push_back(cubes[0]);
+        cubes.erase(cubes.end());
     }
 
     if (cubes.size() > 0)
     {
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 9 && cubes.size() > 0; i++)
         {
             if (cubes[0].left.sarkok[0].R == -1 && cubes[0].right.sarkok[0].R == -1)
             {

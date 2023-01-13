@@ -266,7 +266,8 @@ std::vector<Cube> rectangle_to_cube(std::vector<Rectangle> &rec_vec)
     }
     }
 
-    if(Cubes.size() == 0) {std::cout << "Nem lehet egy kockat se csinalni." << std::endl;}
+    if(Cubes.size() == 0 && rec_vec.size() > 5) {std::cout << "Nincsenek megfelelo szinek." << std::endl;}
+    else if (rec_vec.size() <= 5) { std::cout << "Tul keves negyzet van.\n"; }
     std::cout<< Cubes.size()<<std::endl;
 
     return Cubes;
@@ -275,7 +276,7 @@ std::vector<Cube> rectangle_to_cube(std::vector<Rectangle> &rec_vec)
 int main()
 {
     std::vector<Rectangle> rec_vec;
-    std::ifstream bf("hello_world.txt");  // ide majd a file nevét írjuk be!
+    std::ifstream bf("nem_jo_szinu_2.txt");  // ide majd a file nevét írjuk be!
 
     if(!bf.good())
     {
