@@ -32,7 +32,7 @@ std::vector<Cube> rectangle_to_cube(std::vector<Rectangle> &rec_vec)
         Rectangle temprecleft;
         Rectangle temprectop;
 
-        for(auto i = potential.begin(); potential.size() > 5 && i != potential.end();i++)
+        for(auto i = potential.begin(); potential.size() > 3 && i != potential.end();i++)
         {
             temprecbase = *i;
             potential.erase(i);
@@ -102,6 +102,54 @@ std::vector<Cube> rectangle_to_cube(std::vector<Rectangle> &rec_vec)
             match = false;
             j = 0;
             k = 0;
+
+            if(potential.size() == 1) //Teglatesthez csonka kocka
+            {
+                while(!match)
+                {
+                    if(((sarokeq(temprecnear, potential[0], 3, 0) && sarokeq(temprecnear, potential[0], 2, 1)) && sarokeq(temprecfar, potential[0], 1, 2)) && sarokeq(temprecfar, potential[0], 0, 3))
+                    {
+                        match = true;
+                        temprectop = potential[0];
+                        potential.erase(potential.begin());
+
+                        sarok uressar(-1, -1, -1);
+
+                        for(int l = 0; l < 4;l++)
+                        {
+                            temprecright.sarkok[l] = uressar;
+                            temprecleft.sarkok[l] = uressar;
+                        }
+
+                        tempcube.base = temprecbase;
+                        tempcube.near = temprecnear;
+                        tempcube.far = temprecfar;
+                        tempcube.right = temprecright;
+                        tempcube.left = temprecleft;
+                        tempcube.top = temprectop;
+
+                        Cubes.push_back(tempcube);
+                        tempcube.cube_check();
+                        std::cout<< Cubes.size()<<std::endl;
+
+                        return Cubes;
+                    }
+                    else if(k < 3)
+                    {
+                        potential[0].forgat();
+                        k++;
+                    }
+                    else
+                    {
+                        goodbase = false;
+                        potential.push_back(temprecbase);
+                        potential.push_back(temprecnear);
+                        potential.push_back(temprecfar);
+                    }
+                }
+            }
+
+            if(potential.size() == 2) {goodbase = false;}
 
             while(!match && goodbase) //jobb(right) oldal kereses
             {
@@ -227,7 +275,7 @@ std::vector<Cube> rectangle_to_cube(std::vector<Rectangle> &rec_vec)
 int main()
 {
     std::vector<Rectangle> rec_vec;
-    std::ifstream bf("text.txt");  // ide majd a file nevét írjuk be!
+    std::ifstream bf("dupla_pepita.txt");  // ide majd a file nevét írjuk be!
 
     if(!bf.good())
     {
