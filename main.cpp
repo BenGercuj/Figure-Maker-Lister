@@ -275,7 +275,7 @@ std::vector<Cube> rectangle_to_cube(std::vector<Rectangle> &rec_vec)
 int main()
 {
     std::vector<Rectangle> rec_vec;
-    std::ifstream bf("dupla_pepita.txt");  // ide majd a file nevét írjuk be!
+    std::ifstream bf("hello_world.txt");  // ide majd a file nevét írjuk be!
 
     if(!bf.good())
     {
@@ -297,7 +297,7 @@ int main()
     std::vector<Cube> Cubes = rectangle_to_cube(rec_vec);
     Geometry geo(Cubes);
     geo.cubes_to_geometry();
-    //if (Cubes.size() > 0) { geo.geometry_to_ply(); }
+    geo.geometry_to_ply();
 
     return 0;
 }

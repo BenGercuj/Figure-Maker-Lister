@@ -81,13 +81,13 @@ void Geometry::cubes_to_geometry()
 {
     if (cubes.size() > 0)
     {
-        geometry.push_back(cubes.back());
-        cubes.pop_back();
+        geometry.push_back(cubes[1]);
+        cubes.erase(cubes.begin());
     }
 
     if (cubes.size() > 0)
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 9; i++)
         {
             if (cubes[0].left.sarkok[0].R == -1 && cubes[0].right.sarkok[0].R == -1)
             {
@@ -98,10 +98,12 @@ void Geometry::cubes_to_geometry()
                     geometry[0].right = plh;
                     geometry.push_back(cubes[0]);
                     cubes.erase(cubes.begin());
-                    i = 4;
+                    i = 10;
                 }
 
-                else { cubes[0].xrotate(); }
+                else if (i < 4) { cubes[0].xrotate(); }
+                else if (i == 4) { cubes[0].yrotate(); cubes[0].yrotate(); }
+                else if (i > 4) { cubes[0].xrotate(); }
             }
 
             else
@@ -150,15 +152,15 @@ void Geometry::geometry_to_ply()
     // right, left
     for (int i = 1; i <= geometry.size(); i++)
     {
-        kf << "4 " << i*4-2 << ' ' << i*4-3 << ' ' << i*4+1 << ' ' << i*4+2 << '\n';
-        kf << "4 " << i*4-4 << ' ' << i*4-1 << ' ' << i*4 << ' ' << i*4+3 << '\n';
+        kf << "4 " << i*4-2+((i-1)*8) << ' ' << i*4-3+((i-1)*8) << ' ' << i*4+1 << ' ' << i*4+2 << '\n'; // -2, -3; +6 +5
+        kf << "4 " << i*4-4+((i-1)*8) << ' ' << i*4-1+((i-1)*8) << ' ' << i*4+3 << ' ' << i*4 << '\n';
     }
 
     // near, far
     for (int i = 1; i <= geometry.size(); i++)
     {
-        kf << "4 " << i*4-4 << ' ' << i*4-3 << ' ' << i*4 << ' ' << i*4+1 << '\n';
-        kf << "4 " << i*4-2 << ' ' << i*4-1 << ' ' << i*4+2 << ' ' << i*4+3 << '\n';
+        kf << "4 " << i*4-4+((i-1)*8) << ' ' << i*4-3+((i-1)*8) << ' ' << i*4+1 << ' ' << i*4 << '\n';
+        kf << "4 " << i*4-2+((i-1)*8) << ' ' << i*4-1+((i-1)*8) << ' ' << i*4+3 << ' ' << i*4+2 << '\n';
     }
 
     kf.close();
